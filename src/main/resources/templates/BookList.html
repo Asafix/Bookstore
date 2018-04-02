@@ -2,11 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Welcome to Haaga-Helia!</title>
+<title>Haaga-Helia?</title>
 </head>
 <body>
-
-
-
+<table class="Book list">
+<tr>
+<th>Title</th>
+<th>Author</th>
+<th>Year</th>
+<th>ISBN</th>
+<th>Price</th>
+</tr>
+<tr th:each = "Book : ${title}">
+	<td th:text="${author}></td>
+	<td th:text="${year}></td>
+	<td th:text="${isbn}></td>
+	<td th:text="${price}></td>
+	</tr>
+</table>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.example.Bookstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.Bookstore.domain.Book;
-import com.example.Bookstore.domain.BookRepository;
+import com.example.Bookstore.bean.Book;
+import com.example.Bookstore.bean.BookRepository;
 
 @Controller
 public class BookstoreController {
@@ -23,7 +22,7 @@ public class BookstoreController {
 	public String bookStoreFront(Model model) {
 
 		model.addAttribute("book", new Book());
-		model.addAttribute("books", Repository.findAll());
+		model.addAttribute("books", repository.findAll());
 		return "books";
 	}
 
@@ -41,5 +40,4 @@ public class BookstoreController {
 		repository.delete(id);
 		return "redirect:../booklist";
 	}
-
 }

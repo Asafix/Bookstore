@@ -1,13 +1,33 @@
 package com.example.Bookstore.bean;
 
-public class Book {	
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class Book {	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String title;
 	private String author;
 	private String year;
 	private String isbn;
 	private String price;
+	@ManyToOne
+	@JoinColumn(name="categoryid")
+	private Category category;
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public Book(Long id, String title, String author, String year, String isbn, String price) {
 		super();
@@ -19,6 +39,26 @@ public class Book {
 		this.price = price;
 	}
 
+	public Book(String author, String title, String isbn, String year) {
+		super();
+		this.id = null;
+		this.title = title;
+		this.author = author;
+		this.year = year;
+		this.isbn = isbn;
+		this.price = null;
+	}
+
+	public Book() {
+		super();
+		this.id = null;
+		this.title = null;
+		this.author = null;
+		this.year = null;
+		this.isbn = null;
+		this.price = null;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -66,12 +106,10 @@ public class Book {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-
-	
 	
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
-				+ ", price=" + price + "]";
+				+ ", price=" + price + " , category=" + this.getCategory() + "]";
 	}
 }
